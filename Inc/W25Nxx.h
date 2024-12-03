@@ -12,10 +12,6 @@
 #define W25N_OTP_COUNT		10
 #define W25N_TOTAL_SIZE		134217728
 
-
-void W25N_Reset(void);
-uint32_t W25N_ReadJEDEC_ID(void);
-void W25N_WriteEnable(void);
-void W25N_WriteDisable(void);
+void W25N_Init(void);
 
 #endif

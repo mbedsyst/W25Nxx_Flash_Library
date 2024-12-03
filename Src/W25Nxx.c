@@ -17,22 +17,32 @@
 #define NORMAL_READ           0x03
 #define FAST_READ             0x0B
 
-void W25N_Reset(void)
+static void W25N_WriteEnable(void)
 {
-
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(ENABLE_WRITE);
+	SPI2_DeselectSlave();
+	delay_ms(10);
 }
 
-uint32_t W25N_ReadJEDEC_ID(void)
+static void W25N_WriteDisable(void)
 {
-
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(DISABLE_WRITE);
+	SPI2_DeselectSlave();
+	delay_ms(10);
 }
 
-void W25N_WriteEnable(void)
+static void W25N_Reset(void)
 {
-
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(DEVICE_RESET);
+	SPI2_DeselectSlave();
+	delay_ms(100);
 }
 
-void W25N_WriteDisable(void)
+void W25N_Init(void)
 {
-
+	SPI2_Init();
+	W25N_Reset();
 }

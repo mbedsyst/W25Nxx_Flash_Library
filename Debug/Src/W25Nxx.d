@@ -1,4 +1,4 @@
-Src/main.o: ../Src/main.c ../Inc/W25Nxx.h ../Inc/SPI.h \
+Src/W25Nxx.o: ../Src/W25Nxx.c ../Inc/W25Nxx.h ../Inc/SPI.h \
  ..//Headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ..//Headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
  ..//Headers/CMSIS/Include/core_cm4.h \

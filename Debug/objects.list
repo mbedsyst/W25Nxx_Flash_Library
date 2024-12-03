@@ -2,7 +2,7 @@
 "./Src/SPI.o"
 "./Src/SYSTICK.o"
 "./Src/UART.o"
-"./Src/W25Qxx.o"
+"./Src/W25Nxx.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

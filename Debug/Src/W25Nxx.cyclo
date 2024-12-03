@@ -1,0 +1,4 @@
+../Src/W25Nxx.c:20:13:W25N_WriteEnable	1
+../Src/W25Nxx.c:28:13:W25N_WriteDisable	1
+../Src/W25Nxx.c:36:13:W25N_Reset	1
+../Src/W25Nxx.c:44:6:W25N_Init	1
