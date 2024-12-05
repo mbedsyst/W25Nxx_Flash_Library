@@ -2,6 +2,7 @@
 #define __W25NXX_H__
 
 #include "SPI.h"
+#include "SYSTICK.h"
 
 // W25N01GV Device Macros
 #define W25N_PAGE_SIZE		2048

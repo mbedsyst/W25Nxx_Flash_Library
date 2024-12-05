@@ -262,9 +262,25 @@ Discarded input sections
  .data          0x00000000        0x0 ./Src/W25Nxx.o
  .bss           0x00000000        0x0 ./Src/W25Nxx.o
  .text.W25N_WriteEnable
-                0x00000000       0x1c ./Src/W25Nxx.o
+                0x00000000       0x16 ./Src/W25Nxx.o
  .text.W25N_WriteDisable
-                0x00000000       0x1c ./Src/W25Nxx.o
+                0x00000000       0x16 ./Src/W25Nxx.o
+ .text.W25N_JEDEC_ID
+                0x00000000       0x42 ./Src/W25Nxx.o
+ .text.W25N_ReadStatusReg
+                0x00000000       0x34 ./Src/W25Nxx.o
+ .text.W25N_WriteStatusReg
+                0x00000000       0x36 ./Src/W25Nxx.o
+ .text.W25N_EraseBlock
+                0x00000000       0x4c ./Src/W25Nxx.o
+ .text.W25N_ExecuteWrite
+                0x00000000       0x3e ./Src/W25Nxx.o
+ .text.W25N_WritePage
+                0x00000000       0x6c ./Src/W25Nxx.o
+ .text.W25N_ExecuteRead
+                0x00000000       0x50 ./Src/W25Nxx.o
+ .text.W25N_ReadPage
+                0x00000000       0x5c ./Src/W25Nxx.o
  .debug_macro   0x00000000      0xaa8 ./Src/W25Nxx.o
  .debug_macro   0x00000000      0x189 ./Src/W25Nxx.o
  .debug_macro   0x00000000       0x2e ./Src/W25Nxx.o
@@ -1044,70 +1060,70 @@ LOAD C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000      0x75e
+.debug_info     0x00000000      0x95a
  .debug_info    0x00000000      0x453 ./Src/SPI.o
  .debug_info    0x00000453      0x10b ./Src/SYSTICK.o
- .debug_info    0x0000055e      0x13a ./Src/W25Nxx.o
- .debug_info    0x00000698       0x96 ./Src/main.o
- .debug_info    0x0000072e       0x30 ./Startup/startup_stm32f401retx.o
+ .debug_info    0x0000055e      0x336 ./Src/W25Nxx.o
+ .debug_info    0x00000894       0x96 ./Src/main.o
+ .debug_info    0x0000092a       0x30 ./Startup/startup_stm32f401retx.o
 
-.debug_abbrev   0x00000000      0x379
+.debug_abbrev   0x00000000      0x3ec
  .debug_abbrev  0x00000000      0x14e ./Src/SPI.o
  .debug_abbrev  0x0000014e       0xc6 ./Src/SYSTICK.o
- .debug_abbrev  0x00000214       0xe9 ./Src/W25Nxx.o
- .debug_abbrev  0x000002fd       0x58 ./Src/main.o
- .debug_abbrev  0x00000355       0x24 ./Startup/startup_stm32f401retx.o
+ .debug_abbrev  0x00000214      0x15c ./Src/W25Nxx.o
+ .debug_abbrev  0x00000370       0x58 ./Src/main.o
+ .debug_abbrev  0x000003c8       0x24 ./Startup/startup_stm32f401retx.o
 
-.debug_aranges  0x00000000       0xe0
+.debug_aranges  0x00000000      0x120
  .debug_aranges
                 0x00000000       0x40 ./Src/SPI.o
  .debug_aranges
                 0x00000040       0x20 ./Src/SYSTICK.o
  .debug_aranges
-                0x00000060       0x38 ./Src/W25Nxx.o
+                0x00000060       0x78 ./Src/W25Nxx.o
  .debug_aranges
-                0x00000098       0x20 ./Src/main.o
+                0x000000d8       0x20 ./Src/main.o
  .debug_aranges
-                0x000000b8       0x28 ./Startup/startup_stm32f401retx.o
+                0x000000f8       0x28 ./Startup/startup_stm32f401retx.o
 
 .debug_rnglists
-                0x00000000       0x8f
+                0x00000000       0xbf
  .debug_rnglists
                 0x00000000       0x2b ./Src/SPI.o
  .debug_rnglists
                 0x0000002b       0x13 ./Src/SYSTICK.o
  .debug_rnglists
-                0x0000003e       0x25 ./Src/W25Nxx.o
+                0x0000003e       0x55 ./Src/W25Nxx.o
  .debug_rnglists
-                0x00000063       0x13 ./Src/main.o
+                0x00000093       0x13 ./Src/main.o
  .debug_rnglists
-                0x00000076       0x19 ./Startup/startup_stm32f401retx.o
+                0x000000a6       0x19 ./Startup/startup_stm32f401retx.o
 
-.debug_macro    0x00000000      0x5b0
+.debug_macro    0x00000000      0x5d6
  .debug_macro   0x00000000       0xe1 ./Src/SPI.o
  .debug_macro   0x000000e1      0x189 ./Src/SPI.o
  .debug_macro   0x0000026a       0xd8 ./Src/SYSTICK.o
- .debug_macro   0x00000342      0x150 ./Src/W25Nxx.o
- .debug_macro   0x00000492       0x2e ./Src/W25Nxx.o
- .debug_macro   0x000004c0       0xf0 ./Src/main.o
+ .debug_macro   0x00000342      0x16c ./Src/W25Nxx.o
+ .debug_macro   0x000004ae       0x2e ./Src/W25Nxx.o
+ .debug_macro   0x000004dc       0xfa ./Src/main.o
 
-.debug_line     0x00000000     0x161d
+.debug_line     0x00000000     0x174f
  .debug_line    0x00000000      0x618 ./Src/SPI.o
  .debug_line    0x00000618      0x52d ./Src/SYSTICK.o
- .debug_line    0x00000b45      0x556 ./Src/W25Nxx.o
- .debug_line    0x0000109b      0x507 ./Src/main.o
- .debug_line    0x000015a2       0x7b ./Startup/startup_stm32f401retx.o
+ .debug_line    0x00000b45      0x67b ./Src/W25Nxx.o
+ .debug_line    0x000011c0      0x514 ./Src/main.o
+ .debug_line    0x000016d4       0x7b ./Startup/startup_stm32f401retx.o
 
-.debug_str      0x00000000    0x4fd6b
+.debug_str      0x00000000    0x4fe52
  .debug_str     0x00000000    0x4fa8a ./Src/SPI.o
                               0x4fc7b (size before relaxing)
  .debug_str     0x0004fa8a       0x43 ./Src/SYSTICK.o
                               0x4f738 (size before relaxing)
- .debug_str     0x0004facd      0x20f ./Src/W25Nxx.o
-                              0x4fcac (size before relaxing)
- .debug_str     0x0004fcdc       0x13 ./Src/main.o
-                              0x4faf8 (size before relaxing)
- .debug_str     0x0004fcef       0x7c ./Startup/startup_stm32f401retx.o
+ .debug_str     0x0004facd      0x2f6 ./Src/W25Nxx.o
+                              0x4fdf0 (size before relaxing)
+ .debug_str     0x0004fdc3       0x13 ./Src/main.o
+                              0x4fb04 (size before relaxing)
+ .debug_str     0x0004fdd6       0x7c ./Startup/startup_stm32f401retx.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Src/SPI.o
@@ -1116,12 +1132,12 @@ LOAD C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .comment       0x00000043       0x44 ./Src/W25Nxx.o
  .comment       0x00000043       0x44 ./Src/main.o
 
-.debug_frame    0x00000000      0x1cc
+.debug_frame    0x00000000      0x2ec
  .debug_frame   0x00000000       0xbc ./Src/SPI.o
  .debug_frame   0x000000bc       0x38 ./Src/SYSTICK.o
- .debug_frame   0x000000f4       0x80 ./Src/W25Nxx.o
- .debug_frame   0x00000174       0x2c ./Src/main.o
- .debug_frame   0x000001a0       0x2c C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+ .debug_frame   0x000000f4      0x1a0 ./Src/W25Nxx.o
+ .debug_frame   0x00000294       0x2c ./Src/main.o
+ .debug_frame   0x000002c0       0x2c C:/ST/STM32CubeIDE_1.11.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
 
 .debug_line_str
                 0x00000000       0x60

@@ -1,4 +1,12 @@
-../Src/W25Nxx.c:20:13:W25N_WriteEnable	8	static
-../Src/W25Nxx.c:28:13:W25N_WriteDisable	8	static
-../Src/W25Nxx.c:36:13:W25N_Reset	8	static
-../Src/W25Nxx.c:44:6:W25N_Init	8	static
+../Src/W25Nxx.c:26:13:W25N_WriteEnable	8	static
+../Src/W25Nxx.c:33:13:W25N_WriteDisable	8	static
+../Src/W25Nxx.c:40:13:W25N_Reset	8	static
+../Src/W25Nxx.c:48:6:W25N_Init	8	static
+../Src/W25Nxx.c:54:10:W25N_JEDEC_ID	16	static
+../Src/W25Nxx.c:66:9:W25N_ReadStatusReg	24	static
+../Src/W25Nxx.c:77:6:W25N_WriteStatusReg	16	static
+../Src/W25Nxx.c:86:6:W25N_EraseBlock	24	static
+../Src/W25Nxx.c:99:13:W25N_ExecuteWrite	16	static
+../Src/W25Nxx.c:109:6:W25N_WritePage	24	static
+../Src/W25Nxx.c:124:13:W25N_ExecuteRead	16	static
+../Src/W25Nxx.c:135:6:W25N_ReadPage	24	static

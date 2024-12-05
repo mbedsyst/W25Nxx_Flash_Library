@@ -15,7 +15,7 @@
 #define RAND_PROG_DATA_LOAD   0x84
 #define PROG_EXEC             0x10
 #define PAGE_READ             0x13
-#define NORMAL_READ           0x03
+#define READ_EXEC	          0x03
 #define FAST_READ             0x0B
 
 // Status Register Address Macros
@@ -96,7 +96,7 @@ void W25N_EraseBlock(uint16_t blockNumber)
 	delay_ms(10);
 }
 
-static void W25_ExecuteWrite(uint16_t addr)
+static void W25N_ExecuteWrite(uint16_t addr)
 {
 	SPI2_SelectSlave();
 	SPI2_TransmitReceiveByte(PROG_EXEC);
@@ -106,8 +106,41 @@ static void W25_ExecuteWrite(uint16_t addr)
 	SPI2_DeselectSlave();
 }
 
-void W25N_WritePage(uint32_t addr, uint8_t *data, uint16_t size)
+void W25N_WritePage(uint16_t pageNumber, uint8_t *data, uint16_t size)
 {
+	uint16_t addr = (pageNumber * 2048);
 	W25N_WriteEnable();
 	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(PROG_DATA_LOAD);
+	SPI2_TransmitReceiveByte((addr >> 8) & 0x0F);
+	SPI2_TransmitReceiveByte((addr) & 0xFF);
+	SPI2_TransmitReceive_MultiByte(data, NULL, size);
+	SPI2_DeselectSlave();
+	W25N_WriteDisable();
+	W25N_ExecuteWrite(addr);
+	delay_ms(5);
+}
+
+static void W25N_ExecuteRead(uint16_t addr, uint8_t *data, uint16_t size)
+{
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(READ_EXEC);
+	SPI2_TransmitReceiveByte((addr >> 8) & 0xFF);
+	SPI2_TransmitReceiveByte((addr) & 0xFF);
+	SPI2_TransmitReceiveByte(0xFF);
+	SPI2_TransmitReceive_MultiByte(data, NULL, size);
+	SPI2_DeselectSlave();
+}
+
+void W25N_ReadPage(uint16_t pageNumber, uint8_t *data, uint16_t size)
+{
+	uint16_t addr = (pageNumber * 2048);
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(PAGE_READ);
+	SPI2_TransmitReceiveByte(0xFF);
+	SPI2_TransmitReceiveByte((addr >> 8) & 0xFF);
+	SPI2_TransmitReceiveByte((addr) & 0xFF);
+	SPI2_DeselectSlave();
+	delay_ms(1);
+	W25N_ExecuteRead(addr, data, size);
 }

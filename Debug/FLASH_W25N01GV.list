@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000140c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000075e  00000000  00000000  0000143c  2**0
+ 12 .debug_info   0000095a  00000000  00000000  0000143c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000379  00000000  00000000  00001b9a  2**0
+ 13 .debug_abbrev 000003ec  00000000  00000000  00001d96  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000000e0  00000000  00000000  00001f18  2**3
+ 14 .debug_aranges 00000120  00000000  00000000  00002188  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000008f  00000000  00000000  00001ff8  2**0
+ 15 .debug_rnglists 000000bf  00000000  00000000  000022a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000005b0  00000000  00000000  00002087  2**0
+ 16 .debug_macro  000005d6  00000000  00000000  00002367  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000161d  00000000  00000000  00002637  2**0
+ 17 .debug_line   0000174f  00000000  00000000  0000293d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0004fd6b  00000000  00000000  00003c54  2**0
+ 18 .debug_str    0004fe52  00000000  00000000  0000408c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000539bf  2**0
+ 19 .comment      00000043  00000000  00000000  00053ede  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000001cc  00000000  00000000  00053a04  2**2
+ 20 .debug_frame  000002ec  00000000  00000000  00053f24  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000060  00000000  00000000  00053bd0  2**0
+ 21 .debug_line_str 00000060  00000000  00000000  00054210  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -285,8 +285,8 @@ void delay_ms(uint32_t ms)
  8000314:	e000e010 	.word	0xe000e010
 
 08000318 <W25N_Reset>:
+	SPI2_TransmitReceiveByte(DISABLE_WRITE);
 	SPI2_DeselectSlave();
-	delay_ms(10);
 }
 
 static void W25N_Reset(void)
