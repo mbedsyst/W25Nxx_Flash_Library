@@ -95,3 +95,19 @@ void W25N_EraseBlock(uint16_t blockNumber)
 	SPI2_DeselectSlave();
 	delay_ms(10);
 }
+
+static void W25_ExecuteWrite(uint16_t addr)
+{
+	SPI2_SelectSlave();
+	SPI2_TransmitReceiveByte(PROG_EXEC);
+	SPI2_TransmitReceiveByte(0xFF);
+	SPI2_TransmitReceiveByte((addr >> 8) & 0xFF);
+	SPI2_TransmitReceiveByte((addr) & 0xFF);
+	SPI2_DeselectSlave();
+}
+
+void W25N_WritePage(uint32_t addr, uint8_t *data, uint16_t size)
+{
+	W25N_WriteEnable();
+	SPI2_SelectSlave();
+}
