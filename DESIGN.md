@@ -15,4 +15,4 @@
 / Program Execute________|10h Dummy PA15-8 PA7-0
 / Page Data Read_________|13h Dummy PA15-8 PA7-0
 / Read___________________|03h Dummy Dummy Dummy D7-0 D7-0 D7-0 D7-0 D7-0
-* Fast Read______________|0Bh Dummy Dummy Dummy Dummy D7-0 D7-0 D7-0 D7-0
+/ Fast Read______________|0Bh Dummy Dummy Dummy Dummy D7-0 D7-0 D7-0 D7-0

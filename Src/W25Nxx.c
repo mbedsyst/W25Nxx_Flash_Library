@@ -254,3 +254,21 @@ void W25N_FastReadPage(uint16_t pageNumber, uint8_t *data, uint16_t size)
 	W25N_ExecuteRead(addr, data, size);
 }
 
+void W25N_UpdateLUT(uint16_t lba, uint16_t pba, uint8_t index)
+{
+    if (index < LUT_SIZE)
+    {
+        lut[2 * index] = lba;        // Logical Block Address
+        lut[2 * index + 1] = pba;    // Physical Block Address
+    }
+}
+
+void W25N_GetLUTEntry(uint8_t index, uint16_t *lba, uint16_t *pba)
+{
+    if (index < LUT_SIZE)
+    {
+        *lba = lut[2 * index];      // Logical Block Address
+        *pba = lut[2 * index + 1];  // Physical Block Address
+    }
+}
+
