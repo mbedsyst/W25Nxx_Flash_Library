@@ -1,4 +1,5 @@
 #include "W25Nxx.h"
+#include <stdio.h>
 
 // Device Instruction Macros
 #define DEVICE_RESET          0xFF
@@ -24,27 +25,27 @@
 #define STATUS_REG3			  0xC0
 
 // Status Register-1 Bit Positions
-#define W25N_SR1_BP0        (1 << 3)  // Block Protect Bit 0
-#define W25N_SR1_BP1        (1 << 4)  // Block Protect Bit 1
-#define W25N_SR1_BP2        (1 << 5)  // Block Protect Bit 2
-#define W25N_SR1_BP3        (1 << 6)  // Block Protect Bit 3
-#define W25N_SR1_TB         (1 << 2)  // Top/Bottom Block Protect
-#define W25N_SR1_WP_E       (1 << 1)  // Write Protection Enable
+#define W25N_SR1_BP0         (1 << 3)  // Block Protect Bit 0
+#define W25N_SR1_BP1         (1 << 4)  // Block Protect Bit 1
+#define W25N_SR1_BP2         (1 << 5)  // Block Protect Bit 2
+#define W25N_SR1_BP3         (1 << 6)  // Block Protect Bit 3
+#define W25N_SR1_TB          (1 << 2)  // Top/Bottom Block Protect
+#define W25N_SR1_WP_E        (1 << 1)  // Write Protection Enable
 
 // Status Register-2 Bit Positions
-#define W25N_SR2_BUF        (1 << 3)  // Buffer Read Mode
-#define W25N_SR2_ECC_E      (1 << 4)  // ECC Enable
-#define W25N_SR2_SR1_L      (1 << 6)  // Status Register-1 Lock
-#define W25N_SR2_OTP_E      (1 << 2)  // OTP Access Mode Enable
+#define W25N_SR2_BUF         (1 << 3)  // Buffer Read Mode
+#define W25N_SR2_ECC_E       (1 << 4)  // ECC Enable
+#define W25N_SR2_SR1_L       (1 << 6)  // Status Register-1 Lock
+#define W25N_SR2_OTP_E       (1 << 2)  // OTP Access Mode Enable
 
 // Status Register-3 Bit Positions
-#define W25N_SR3_LUT_F      (1 << 0)  // Look-Up Table Full
-#define W25N_SR3_ECC_0      (1 << 2)  // ECC Status Bit 0
-#define W25N_SR3_ECC_1      (1 << 3)  // ECC Status Bit 1
-#define W25N_SR3_P_FAIL     (1 << 4)  // Program Failure
-#define W25N_SR3_E_FAIL     (1 << 5)  // Erase Failure
-#define W25N_SR3_WEL        (1 << 1)  // Write Enable Latch
-#define W25N_SR3_BUSY       (1 << 0)  // Erase/Program In Progress
+#define W25N_SR3_LUT_F       (1 << 0)  // Look-Up Table Full
+#define W25N_SR3_ECC_0       (1 << 2)  // ECC Status Bit 0
+#define W25N_SR3_ECC_1       (1 << 3)  // ECC Status Bit 1
+#define W25N_SR3_P_FAIL      (1 << 4)  // Program Failure
+#define W25N_SR3_E_FAIL      (1 << 5)  // Erase Failure
+#define W25N_SR3_WEL         (1 << 1)  // Write Enable Latch
+#define W25N_SR3_BUSY        (1 << 0)  // Erase/Program In Progress
 
 
 static void W25N_WriteEnable(void)
@@ -52,6 +53,7 @@ static void W25N_WriteEnable(void)
 	SPI2_SelectSlave();
 	SPI2_TransmitReceiveByte(ENABLE_WRITE);
 	SPI2_DeselectSlave();
+
 }
 
 static void W25N_WriteDisable(void)
@@ -73,6 +75,7 @@ void W25N_Init(void)
 {
 	SPI2_Init();
 	W25N_Reset();
+	printf("[info] Flash Reset and Initialized.\n\r");
 }
 
 uint32_t W25N_JEDEC_ID(void)
@@ -84,6 +87,7 @@ uint32_t W25N_JEDEC_ID(void)
 	SPI2_TransmitReceiveByte(dummyByte);
 	SPI2_TransmitReceive_MultiByte(&dummyByte, id, 3);
 	SPI2_DeselectSlave();
+	printf("[info] Retrieved JEDEC ID.\n\r");
 	return ((id[0] << 16) | (id[1] << 8) | (id[2]));
 }
 
@@ -95,6 +99,7 @@ uint8_t W25N_ReadStatusReg(uint8_t addr)
 	SPI2_TransmitReceiveByte(addr & 0xFF);
 	status_reg = SPI2_TransmitReceiveByte(0xFF);
 	SPI2_DeselectSlave();
+	printf("[info] Reading Status Register.\n\r");
 	return status_reg;
 }
 
@@ -105,9 +110,10 @@ static void W25N_WriteStatusReg(uint8_t addr, uint8_t data)
 	SPI2_TransmitReceiveByte(addr);
 	SPI2_TransmitReceiveByte(data);
 	SPI2_DeselectSlave();
+	printf("[info] Writing to Status Register.\n\r");
 }
 
-static void W25N_EraseBlock(uint16_t blockNumber)
+void W25N_EraseBlock(uint16_t blockNumber)
 {
 	uint16_t addr = (blockNumber * 64 * 2048); // 1 Block contains 64 Pages each of 2048 bytes (131072 bytes)
 	W25N_WriteEnable();
@@ -118,6 +124,7 @@ static void W25N_EraseBlock(uint16_t blockNumber)
 	SPI2_TransmitReceiveByte((addr) & 0xFF);
 	SPI2_DeselectSlave();
 	delay_ms(10);
+	printf("[info] Erasing Block Number %d.\n\r", blockNumber);
 }
 
 uint8_t W25N_GetStatusBit(uint8_t reg_addr, uint8_t bit_pos)
@@ -215,6 +222,7 @@ void W25N_WritePage(uint16_t pageNumber, uint8_t *data, uint16_t size)
 	W25N_WriteDisable();
 	W25N_ExecuteWrite(addr);
 	delay_ms(5);
+	printf("[info] Writing Data to Flash Memory.\n\r");
 }
 
 static void W25N_ExecuteRead(uint16_t addr, uint8_t *data, uint16_t size)
@@ -239,6 +247,7 @@ void W25N_ReadPage(uint16_t pageNumber, uint8_t *data, uint16_t size)
 	SPI2_DeselectSlave();
 	delay_ms(1);
 	W25N_ExecuteRead(addr, data, size);
+	printf("[info] Reading Data (Normal) from Flash Memory.\n\r");
 }
 
 void W25N_FastReadPage(uint16_t pageNumber, uint8_t *data, uint16_t size)
@@ -252,11 +261,12 @@ void W25N_FastReadPage(uint16_t pageNumber, uint8_t *data, uint16_t size)
 	SPI2_DeselectSlave();
 	delay_ms(1);
 	W25N_ExecuteRead(addr, data, size);
+	printf("[info] Reading Data (Fast) from Flash Memory.\n\r");
 }
 
 void W25N_UpdateLUT(uint16_t lba, uint16_t pba, uint8_t index)
 {
-    if (index < LUT_SIZE)
+    if (index < BBM_LUT_SIZE)
     {
         lut[2 * index] = lba;        // Logical Block Address
         lut[2 * index + 1] = pba;    // Physical Block Address
@@ -265,7 +275,7 @@ void W25N_UpdateLUT(uint16_t lba, uint16_t pba, uint8_t index)
 
 void W25N_GetLUTEntry(uint8_t index, uint16_t *lba, uint16_t *pba)
 {
-    if (index < LUT_SIZE)
+    if (index < BBM_LUT_SIZE)
     {
         *lba = lut[2 * index];      // Logical Block Address
         *pba = lut[2 * index + 1];  // Physical Block Address
